@@ -21,7 +21,7 @@ class Pista: private FilaEnc<Veiculo> {
      tamanhoPista = tamPista;
      velocidade = vel;
      srand( (unsigned)time(NULL) );  // Acho q tem q ter essa linha, se não rand() sorteia sempre os mesmos nºos
-     variancia = rand() % var*2 + 1 + (-var);  // +/- rand() % var
+     variancia = int((rand()/RAND_MAX)*(var*2+1) + (tempoEntrada-var));  // Seguindo as instrucoes do professor
      tempoEntrada = tmpEntr + var; // tempoEntrada + variancia
      pistaFonte = pFonte;
      pistaSumidouro = pSumidouro;
