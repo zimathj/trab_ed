@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#define tempo = 3600;
+#define Tempo = 3600;
 #define Sem_L = 40;
 #define Sem_N = 40;
 #define Sem_O = 40;
@@ -87,6 +87,44 @@ class Main {
 
 
     // 3° passo : criar eventos
+
+
+    ListaEnc eventos = new ListaEnc<Evento>();  // cria a lista de eventos
+
+    // abre os sinaleiros leste
+    for (int i = 0; i < Tempo; i = i + (Sem_L+Sem_N+Sem_O+Sem_S)) {
+	Evento a = new Evento(NULL, 1, i, o1Leste);
+	eventos->adicionaEmOrdem(i);	
+	Evento b = new Evento(NULL, 1, i, c1Leste);        
+	eventos->adicionaEmOrdem(i);
+    }
+
+    // fecha os sinaleiros leste
+    for (int i = Sem_L; i < Tempo; i = i + (Sem_N+Sem_O+Sem_S+Sem_L)) {
+	Evento a = new Evento(NULL, 0, i, o1Leste);
+	eventos->adicionaEmOrdem(i);
+	Evento b = new Evento(NULL, 0, i, c1Leste);        
+	eventos->adicionaEmOrdem(i);
+    }
+
+    // abre os sinaleiros norte
+    for (int i = Sem_L; i < Tempo; i = i + (Sem_N+Sem_O+Sem_S+Sem_L)) {
+	Evento a = new Evento(NULL, 0, i, o1Leste);
+	eventos->adicionaEmOrdem(i);
+	Evento b = new Evento(NULL, 0, i, c1Leste);        
+	eventos->adicionaEmOrdem(i);
+    }
+
+    // fecha os sinaleiros norte
+
+    // abre os sinaleiros oeste
+
+    // fecha os sinaleiros oeste
+
+    // abre os sinaleiros sul
+
+    // fecha os sinaleiros sul 
+
 
     // 4° passo : processar
 

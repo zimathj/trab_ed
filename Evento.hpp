@@ -5,8 +5,15 @@ class Evento : private Elemento<int> {
 	Veiculo *veiculo;
 	int tipoDeEvento;
 	int tempoDoDisparo;
-
+	Pista *pista;
  public:
+	Evento(Veiculo &carro, int tipo, int tempo, Pista &estrada) : Elemento<int>::Elemento(tempo, NULL) {
+		veiculo = carro;
+		tipoDeEvento = tipo;
+		tempoDoDisparo = tempo;
+		pista = estrada;	
+	}
+	
 	executar() {
 		switch(tipoDeEvento) { 
 			case 0:
