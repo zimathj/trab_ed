@@ -1,5 +1,11 @@
 #include <stdlib.h>
 
+#define tempo = 3600;
+#define Sem_L = 40;
+#define Sem_N = 40;
+#define Sem_O = 40;
+#define Sem_S = 40;
+
 class Main {
 
   int main() {
@@ -10,28 +16,42 @@ class Main {
     // Pista(int tamPista, int vel, int tmpEntr, int var,
     //      bool pFonte, bool pSumidouro)
 
+    Lista[] pistas = new Lista<Pista>[14];
+
     Pista o1Oeste = new Pista(2000, 80, 0, 0, 0, 1);
     Pista o1Leste = new Pista(2000, 80, 10, 2, 1, 0);
+    pistas[0] = o1Oeste;
+    pistas[1] = o1Leste;
 
     Pista n1Sul = new Pista(500, 60, 20, 5, 1, 0);
     Pista n1Norte = new Pista(500, 60, 0, 0, 0, 1);
+    pistas[2] = n1Sul;
+    pistas[3] = n1Norte;
 
     Pista n2Sul = new Pista(500, 40, 20, 5, 1, 0);
     Pista n2Norte = new Pista(500, 80, 0, 0, 0, 1);
+    pistas[4] = n2Sul;
+    pistas[5] = n2Norte;
 
     Pista s1Sul = new Pista(500, 60, 0, 0, 0, 1);
     Pista s1Norte = new Pista(500, 60, 30, 7, 1, 0);
+    pistas[6] = s1Sul;
+    pistas[7] = s1Norte;
 
     Pista s2Sul = new Pista(500, 40, 0, 0, 0, 1);
     Pista s2Norte = new Pista(500, 40, 60, 15, 1, 0);
+    pistas[8] = s2Sul;
+    pistas[9] = s2Norte;
 
     Pista c1Oeste = new Pista(300, 60, 0, 0, 0, 0);
     Pista c1Leste = new Pista(300, 60, 0, 0, 0, 0);
+    pistas[10] = c1Oeste;
+    pistas[11] = c1Leste;
 
     Pista l1Oeste = new Pista(400, 30, 10, 2, 1, 0);
     Pista l1Leste = new Pista(400, 30, 0, 0, 0, 1);
-
-
+    pistas[12] = l1Oeste;
+    pistas[13] = l1Leste;
 
     // 2° passo : conectar as pistas
 
