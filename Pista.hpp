@@ -19,14 +19,16 @@ class Pista: private FilaEnc<Veiculo> {
          bool pFonte, bool pSumidouro) {
      tamanhoPista = tamPista;
      velocidade = vel;
+     srand( (unsigned)time(NULL) );  // Acho q tem q ter essa linha, se não rand() sorteia sempre os mesmos nºos
      variancia = rand() % var*2 + 1 + (-var);  // +/- rand() % var
      tempoEntrada = tmpEntr + var; // tempoEntrada + variancia
      pistaFonte = pFonte;
      pistaSumidouro = pSumidouro;
      direcao = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
+     int tempo = tamanhoPista/velocidade;  // Tempo q cada veículo vai levar para chegar ao final
    }
    ~Pista() {
-
+	ListaEnc<Veiculo>::destroiLista();  // Usa o destrutor herdado
    }
 
    // Método para conectar pistas
