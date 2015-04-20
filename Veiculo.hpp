@@ -8,7 +8,8 @@ class Veiculo {
  public:
   Veiculo() {
     // tamanho do veiculo mais 3 metros(2 à frente e 1 atrás)
-    tamanho = (rand() % 6 + 2) + 3;
+    srand( (unsigned)time(NULL) );
+    tamanho = (rand() % 6 + 2) + 3;  // No lugar de 6, não é 4?
     direcao = rand() % 10
   }
   ~Veiculo(){
