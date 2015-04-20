@@ -12,6 +12,7 @@ class Pista: private FilaEnc<Veiculo> {
    bool pistaFonte;
    bool pistaSumidouro;
    Pista *direcao[10];
+   int tempo;
    //Pista **direcao = new Pista*[10];
 
  public:
@@ -25,7 +26,7 @@ class Pista: private FilaEnc<Veiculo> {
      pistaFonte = pFonte;
      pistaSumidouro = pSumidouro;
      direcao = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
-     int tempo = tamanhoPista/velocidade;  // Tempo q cada veículo vai levar para chegar ao final
+     tempo = tamanhoPista/velocidade;  // Tempo q cada veículo vai levar para chegar ao final
    }
    ~Pista() {
 	ListaEnc<Veiculo>::destroiLista();  // Usa o destrutor herdado
