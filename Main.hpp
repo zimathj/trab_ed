@@ -2,9 +2,9 @@
 
 #define Tempo = 3600;
 #define Sem_L = 40;
-#define Sem_N = 40;
-#define Sem_O = 40;
 #define Sem_S = 40;
+#define Sem_O = 40;
+#define Sem_N = 40;
 
 class Main {
 
@@ -92,38 +92,67 @@ class Main {
     ListaEnc eventos = new ListaEnc<Evento>();  // cria a lista de eventos
 
     // abre os sinaleiros leste
-    for (int i = 0; i < Tempo; i = i + (Sem_L+Sem_N+Sem_O+Sem_S)) {
-	Evento a = new Evento(NULL, 1, i, o1Leste);
+    for (int i = 0; i < Tempo; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
+	Evento *a = new Evento(NULL, 1, i, o1Leste);
 	eventos->adicionaEmOrdem(a);	
-	Evento b = new Evento(NULL, 1, i, c1Leste);        
+	Evento *b = new Evento(NULL, 1, i, c1Leste);        
 	eventos->adicionaEmOrdem(b);
     }
 
     // fecha os sinaleiros leste
-    for (int i = Sem_L; i < Tempo; i = i + (Sem_N+Sem_O+Sem_S+Sem_L)) {
-	Evento a = new Evento(NULL, 0, i, o1Leste);
-	eventos->adicionaEmOrdem(i);
-	Evento b = new Evento(NULL, 0, i, c1Leste);        
-	eventos->adicionaEmOrdem(i);
+    for (int i = Sem_L; i < Tempo; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
+	Evento *a = new Evento(NULL, 0, i, o1Leste);
+	eventos->adicionaEmOrdem(a);
+	Evento *b = new Evento(NULL, 0, i, c1Leste);        
+	eventos->adicionaEmOrdem(b);
     }
 
+    // abre os sinaleiros sul
+    for (int i = Sem_L; i < Tempo; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
+	Evento *a = new Evento(NULL, 1, i, n1Sul);
+	eventos->adicionaEmOrdem(a);
+	Evento *b = new Evento(NULL, 1, i, n2Sul);        
+	eventos->adicionaEmOrdem(b);
+    }
+
+    // fecha os sinaleiros sul
+    for (int i = Sem_L+Sem_S; i < Tempo; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
+	Evento *a = new Evento(NULL, 0, i, n1Sul);
+	eventos->adicionaEmOrdem(a);
+	Evento *b = new Evento(NULL, 0, i, n2Sul);        
+	eventos->adicionaEmOrdem(b);
+    }
+
+    // abre os sinaleiros oeste
+    for (int i = Sem_L+Sem_S; i < Tempo; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
+	Evento *a = new Evento(NULL, 1, i, c1Oeste);
+	eventos->adicionaEmOrdem(a);
+	Evento *b = new Evento(NULL, 1, i, l1Oeste);        
+	eventos->adicionaEmOrdem(b);
+    }
+    // fecha os sinaleiros oeste
+    for (int i = Sem_L+Sem_S+Sem_O; i < Tempo; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
+	Evento *a = new Evento(NULL, 0, i, c1Oeste);
+	eventos->adicionaEmOrdem(a);
+	Evento *b = new Evento(NULL, 0, i, l1Oeste);        
+	eventos->adicionaEmOrdem(b);
+    }
+    
     // abre os sinaleiros norte
-    for (int i = Sem_L; i < Tempo; i = i + (Sem_N+Sem_O+Sem_S+Sem_L)) {
-	Evento a = new Evento(NULL, 0, i, o1Leste);
-	eventos->adicionaEmOrdem(i);
-	Evento b = new Evento(NULL, 0, i, c1Leste);        
-	eventos->adicionaEmOrdem(i);
+    for (int i = Sem_L+Sem_S+Sem_O; i < Tempo; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
+	Evento *a = new Evento(NULL, 1, i, s1Norte);
+	eventos->adicionaEmOrdem(a);
+	Evento *b = new Evento(NULL, 1, i, s2Norte);        
+	eventos->adicionaEmOrdem(b);
     }
 
     // fecha os sinaleiros norte
-
-    // abre os sinaleiros oeste
-
-    // fecha os sinaleiros oeste
-
-    // abre os sinaleiros sul
-
-    // fecha os sinaleiros sul 
+    for (int i = Sem_L+Sem_S+Sem_O+Sem_N; i < Tempo; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
+	Evento *a = new Evento(NULL, 0, i, s1Norte);
+	eventos->adicionaEmOrdem(a);
+	Evento *b = new Evento(NULL, 0, i, s2Norte);        
+	eventos->adicionaEmOrdem(b);
+    } 
 
 
     // 4° passo : processar

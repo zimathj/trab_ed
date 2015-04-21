@@ -68,5 +68,7 @@ class Pista: private FilaEnc<Veiculo> {
 
    //
 
-
+   void adiciona(const &Pista dado) {
+     ListaCirc<Pista>::adiciona(dado);
+   }
 };
