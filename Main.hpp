@@ -154,10 +154,64 @@ class Main {
 	eventos->adicionaEmOrdem(b);
     }
 
+
+
     // criaçao de carros nas pistas fonte
-     
 
 
+
+    for (int i = 0; i < Tempo; i = i + o1Leste->tempoEntrada) {
+      Evento *a = new Evento(NULL, 2, i, o1Leste);
+      if (a != NULL) {				// AQUI! Temos um problem! 'b' só vai ocorrer, se 'a' ocorrer
+        eventos->adicionaEmOrdem(a);
+        Evento *b = new Evento(NULL, 3, i+o1Leste->tempo, o1Leste);
+        eventos->adicionaEmOrdem(b);
+      }
+    } 
+
+    for (int i = 0; i < Tempo; i = i + n1Sul->tempoEntrada) {
+      Evento *a = new Evento(NULL, 2, i, n1Sul);
+      if (a != NULL) {
+        eventos->adicionaEmOrdem(a);
+        Evento *b = new Evento(NULL, 3, i+n1Sul->tempo, n1Sul);
+        eventos->adicionaEmOrdem(b);
+      }
+    } 
+
+    for (int i = 0; i < Tempo; i = i + n2Sul->tempoEntrada) {
+      Evento *a = new Evento(NULL, 2, i, n2Sul);
+      if (a != NULL) {
+        eventos->adicionaEmOrdem(a);
+        Evento *b = new Evento(NULL, 3, i+n2Sul->tempo, n2Sul);
+        eventos->adicionaEmOrdem(b);
+      }
+    }
+
+    for (int i = 0; i < Tempo; i = i + l1Oeste->tempoEntrada) {
+      Evento *a = new Evento(NULL, 2, i, l1Oeste);
+      if (a != NULL) {
+        eventos->adicionaEmOrdem(a);
+        Evento *b = new Evento(NULL, 3, i+l1Oeste->tempo, l1Oeste);
+        eventos->adicionaEmOrdem(b);
+      }
+
+    for (int i = 0; i < Tempo; i = i + s2Norte->tempoEntrada) {
+      Evento *a = new Evento(NULL, 2, i, s2Norte);
+      if (a != NULL) {
+        eventos->adicionaEmOrdem(a);
+        Evento *b = new Evento(NULL, 3, i+s2Norte->tempo, s2Norte);
+        eventos->adicionaEmOrdem(b);
+      }
+    }  
+
+    for (int i = 0; i < Tempo; i = i + s1Norte->tempoEntrada) {
+      Evento *a = new Evento(NULL, 2, i, s1Norte);
+      if (a != NULL) {
+        eventos->adicionaEmOrdem(a);
+        Evento *b = new Evento(NULL, 3, i+s1Norte->tempo, s1Norte);
+        eventos->adicionaEmOrdem(b);
+      }
+    }
     // 4° passo : processar
 
 }

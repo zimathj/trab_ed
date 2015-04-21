@@ -20,9 +20,8 @@ class Pista: private FilaEnc<Veiculo> {
          bool pFonte, bool pSumidouro) {
      tamanhoPista = tamPista;
      velocidade = vel;
-     srand( (unsigned)time(NULL) );  // Acho q tem q ter essa linha, se não rand() sorteia sempre os mesmos nºos
-     variancia = int((rand()/RAND_MAX)*(var*2+1) + (tempoEntrada-var));  // Seguindo as instrucoes do professor
-     tempoEntrada = tmpEntr + var; // tempoEntrada + variancia
+     variancia = var;
+     tempoEntrada = tmpEntr;
      pistaFonte = pFonte;
      pistaSumidouro = pSumidouro;
      direcao = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
@@ -68,7 +67,9 @@ class Pista: private FilaEnc<Veiculo> {
 
    //
 
-   void adiciona(const &Pista dado) {
-     ListaCirc<Pista>::adiciona(dado);
+   int CriarVeiculo() {
+     srand( (unsigned)time(NULL) );  // Acho q tem q ter essa linha, se não rand() sorteia sempre os mesmos nºos
+     return int((rand()/RAND_MAX)*(variancia*2+1) + (tempoEntrada-variancia));  // Seguindo as instrucoes do professor
+										// retorna o tempo da criacao
    }
 };
