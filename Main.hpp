@@ -152,7 +152,10 @@ class Main {
 	eventos->adicionaEmOrdem(a);
 	Evento *b = new Evento(NULL, 0, i, s2Norte);        
 	eventos->adicionaEmOrdem(b);
-    } 
+    }
+
+    // criaçao de carros nas pistas fonte
+     
 
 
     // 4° passo : processar
