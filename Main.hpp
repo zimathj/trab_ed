@@ -94,9 +94,9 @@ class Main {
     // abre os sinaleiros leste
     for (int i = 0; i < Tempo; i = i + (Sem_L+Sem_N+Sem_O+Sem_S)) {
 	Evento a = new Evento(NULL, 1, i, o1Leste);
-	eventos->adicionaEmOrdem(i);	
+	eventos->adicionaEmOrdem(a);	
 	Evento b = new Evento(NULL, 1, i, c1Leste);        
-	eventos->adicionaEmOrdem(i);
+	eventos->adicionaEmOrdem(b);
     }
 
     // fecha os sinaleiros leste
