@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-class Evento: private ListaEnc<T> {
+class Evento: private ListaEnc<Evento> {
  private:
 	Veiculo *veiculo;
 	int tipoDeEvento;
@@ -52,13 +52,13 @@ class Evento: private ListaEnc<T> {
 	adicionaEmOrdem(const Evento& data) {
 		if (listaVazia())
 			adicionaNoInicio(data);
-		Elemento<Evento>* aux = head;
+		ListaEnc<Evento>::Elemento<Evento>* aux = ListaEnc<Evento>::head;
 		int pos = 0;
-		while (aux->getProximo() != NULL && maior(data->tempoDoDisparo, (aux->getInfo())->tempoDoDisparo) {
-			aux = aux->getProximo();
+		while (ListaEnc<Evento>::aux->getProximo() != NULL && maior(data->tempoDoDisparo, (ListaEnc<Evento>::aux->getInfo())->tempoDoDisparo) {
+			ListaEnc<Evento>::aux = ListaEnc<Evento>::aux->getProximo();
 			pos++;
 		}
-		if (maior(data->tempoDoDisparo, (aux->getInfo())->tempoDoDisparo))
+		if (maior(data->tempoDoDisparo, (ListaEnc<Evento>::aux->getInfo())->tempoDoDisparo))
 			adiciona(data);
 		adicionaNaPosicao(data, pos);
 	}
