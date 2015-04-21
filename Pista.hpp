@@ -67,7 +67,7 @@ class Pista: private FilaEnc<Veiculo> {
 
    //
 
-   int CriarVeiculo() {
+   int tempoParaEntrada() {
      srand( (unsigned)time(NULL) );  // Acho q tem q ter essa linha, se não rand() sorteia sempre os mesmos nºos
      return int((rand()/RAND_MAX)*(variancia*2+1) + (tempoEntrada-variancia));  // Seguindo as instrucoes do professor
 										// retorna o tempo da criacao
