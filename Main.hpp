@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#define Tempo = 3600;
+#define TempoSimulacao = 3600;
 #define Sem_L = 40;
 #define Sem_S = 40;
 #define Sem_O = 40;
@@ -92,65 +92,65 @@ class Main {
     ListaEnc eventos = new ListaEnc<Evento>();  // cria a lista de eventos
 
     // abre os sinaleiros leste
-    for (int i = 0; i < Tempo; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
+    for (int i = 0; i < TempoSimulacao; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
 	Evento *a = new Evento(NULL, 1, i, o1Leste);
-	eventos->adicionaEmOrdem(a);	
-	Evento *b = new Evento(NULL, 1, i, c1Leste);        
+	eventos->adicionaEmOrdem(a);
+	Evento *b = new Evento(NULL, 1, i, c1Leste);
 	eventos->adicionaEmOrdem(b);
     }
 
     // fecha os sinaleiros leste
-    for (int i = Sem_L; i < Tempo; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
+    for (int i = Sem_L; i < TempoSimulacao; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
 	Evento *a = new Evento(NULL, 0, i, o1Leste);
 	eventos->adicionaEmOrdem(a);
-	Evento *b = new Evento(NULL, 0, i, c1Leste);        
+	Evento *b = new Evento(NULL, 0, i, c1Leste);
 	eventos->adicionaEmOrdem(b);
     }
 
     // abre os sinaleiros sul
-    for (int i = Sem_L; i < Tempo; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
+    for (int i = Sem_L; i < TempoSimulacao; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
 	Evento *a = new Evento(NULL, 1, i, n1Sul);
 	eventos->adicionaEmOrdem(a);
-	Evento *b = new Evento(NULL, 1, i, n2Sul);        
+	Evento *b = new Evento(NULL, 1, i, n2Sul);
 	eventos->adicionaEmOrdem(b);
     }
 
     // fecha os sinaleiros sul
-    for (int i = Sem_L+Sem_S; i < Tempo; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
+    for (int i = Sem_L+Sem_S; i < TempoSimulacao; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
 	Evento *a = new Evento(NULL, 0, i, n1Sul);
 	eventos->adicionaEmOrdem(a);
-	Evento *b = new Evento(NULL, 0, i, n2Sul);        
+	Evento *b = new Evento(NULL, 0, i, n2Sul);
 	eventos->adicionaEmOrdem(b);
     }
 
     // abre os sinaleiros oeste
-    for (int i = Sem_L+Sem_S; i < Tempo; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
+    for (int i = Sem_L+Sem_S; i < TempoSimulacao; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
 	Evento *a = new Evento(NULL, 1, i, c1Oeste);
 	eventos->adicionaEmOrdem(a);
-	Evento *b = new Evento(NULL, 1, i, l1Oeste);        
+	Evento *b = new Evento(NULL, 1, i, l1Oeste);
 	eventos->adicionaEmOrdem(b);
     }
     // fecha os sinaleiros oeste
-    for (int i = Sem_L+Sem_S+Sem_O; i < Tempo; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
+    for (int i = Sem_L+Sem_S+Sem_O; i < TempoSimulacao; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
 	Evento *a = new Evento(NULL, 0, i, c1Oeste);
 	eventos->adicionaEmOrdem(a);
-	Evento *b = new Evento(NULL, 0, i, l1Oeste);        
+	Evento *b = new Evento(NULL, 0, i, l1Oeste);
 	eventos->adicionaEmOrdem(b);
     }
-    
+
     // abre os sinaleiros norte
-    for (int i = Sem_L+Sem_S+Sem_O; i < Tempo; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
+    for (int i = Sem_L+Sem_S+Sem_O; i < TempoSimulacao; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
 	Evento *a = new Evento(NULL, 1, i, s1Norte);
 	eventos->adicionaEmOrdem(a);
-	Evento *b = new Evento(NULL, 1, i, s2Norte);        
+	Evento *b = new Evento(NULL, 1, i, s2Norte);
 	eventos->adicionaEmOrdem(b);
     }
 
     // fecha os sinaleiros norte
-    for (int i = Sem_L+Sem_S+Sem_O+Sem_N; i < Tempo; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
+    for (int i = Sem_L+Sem_S+Sem_O+Sem_N; i < TempoSimulacao; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
 	Evento *a = new Evento(NULL, 0, i, s1Norte);
 	eventos->adicionaEmOrdem(a);
-	Evento *b = new Evento(NULL, 0, i, s2Norte);        
+	Evento *b = new Evento(NULL, 0, i, s2Norte);
 	eventos->adicionaEmOrdem(b);
     }
 
@@ -160,25 +160,25 @@ class Main {
 
 
 
-    for (int i = 0; i < Tempo; i = i + (int tmp = o1Leste->tempoParaEntrada())) {
+    for (int i = 0; i < TempoSimulacao; i = i + (int tmp = o1Leste->tempoParaEntrada())) {
       Evento *a = new Evento(NULL, 2, i + tmp, o1Leste);
      // if (a != NULL) {				// 'b' só vai ocorrer, se 'a' ocorrer, ou seja, somente em tempo de execução
      //   eventos->adicionaEmOrdem(a);
      //   Evento *b = new Evento(NULL, 3, i+o1Leste->tempo, o1Leste);
      //   eventos->adicionaEmOrdem(b);
       }
-    } 
+    }
 
-    for (int i = 0; i < Tempo; i = i + (int tmp = n1Sul->tempoParaEntrada())) {
+    for (int i = 0; i < TempoSimulacao; i = i + (int tmp = n1Sul->tempoParaEntrada())) {
       Evento *a = new Evento(NULL, 2, i + tmp, n1Sul);
      // if (a != NULL) {
      //   eventos->adicionaEmOrdem(a);
      //   Evento *b = new Evento(NULL, 3, i+n1Sul->tempo, n1Sul);
      //   eventos->adicionaEmOrdem(b);
       }
-    } 
+    }
 
-    for (int i = 0; i < Tempo; i = i + (int tmp = n2Sul->tempoParaEntrada())) {
+    for (int i = 0; i < TempoSimulacao; i = i + (int tmp = n2Sul->tempoParaEntrada())) {
       Evento *a = new Evento(NULL, 2, i + tmp, n2Sul);
      // if (a != NULL) {
      //   eventos->adicionaEmOrdem(a);
@@ -187,7 +187,7 @@ class Main {
       }
     }
 
-    for (int i = 0; i < Tempo; i = i + (int tmp = l1Oeste->tempoParaEntrada())) {
+    for (int i = 0; i < TempoSimulacao; i = i + (int tmp = l1Oeste->tempoParaEntrada())) {
       Evento *a = new Evento(NULL, 2, i + tmp, l1Oeste);
      // if (a != NULL) {
      //   eventos->adicionaEmOrdem(a);
@@ -195,16 +195,16 @@ class Main {
      //   eventos->adicionaEmOrdem(b);
       }
 
-    for (int i = 0; i < Tempo; i = i + (int tmp = s2Norte->tempoParaEntrada())) {
+    for (int i = 0; i < TempoSimulacao; i = i + (int tmp = s2Norte->tempoParaEntrada())) {
       Evento *a = new Evento(NULL, 2, i + tmp, s2Norte);
      // if (a != NULL) {
      //   eventos->adicionaEmOrdem(a);
      //   Evento *b = new Evento(NULL, 3, i+s2Norte->tempo, s2Norte);
      //   eventos->adicionaEmOrdem(b);
       }
-    }  
+    }
 
-    for (int i = 0; i < Tempo; i = i + (int tmp = s1Norte->tempoParaEntrada())) {
+    for (int i = 0; i < TempoSimulacao; i = i + (int tmp = s1Norte->tempoParaEntrada())) {
       Evento *a = new Evento(NULL, 2, i + tmp, s1Norte);
      // if (a != NULL) {
      //   eventos->adicionaEmOrdem(a);
@@ -222,9 +222,9 @@ class Main {
 
 
 
-    for (Evento *executor = eventos->head; executor != NULL; executor = executor->getProximo()) {
-    	executor->executar();
-    }
+    Evento *executor;
+    executor->executarLista(eventos);
+
 
 }
 

@@ -58,6 +58,11 @@ class Evento: private ListaEnc<Evento> {
 
 	destruirVeiculo() {}
 
+	executarLista() {
+		Evento *executor;
+		
+	}
+
 	adicionaEmOrdem(const Evento &data) {
 		if (listaVazia())
 			adicionaNoInicio(data);

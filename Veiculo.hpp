@@ -9,7 +9,7 @@ class Veiculo {
   Veiculo() {
     // tamanho do veiculo mais 3 metros(2 à frente e 1 atrás)
     srand( (unsigned)time(NULL) );
-    tamanho = (rand() % 6 + 2) + 3;  // No lugar de 6, não é 4? E tira o +3?
+    tamanho = (rand() % 5 + 2) + 3;  // No lugar de 6, não é 4? E tira o +3?
     direcao = rand() % 10;
   }
   ~Veiculo(){
