@@ -5,14 +5,13 @@ class Evento: private ListaEnc<Evento> {
 	Veiculo *veiculo;
 	int tipoDeEvento;
 	int tempoDoDisparo;
-	Pista *pista;
-	Evento *proximo;
+	Pista *aPista;
  public:
-	Evento(Veiculo &carro, int tipo, int tempo, Pista &estrada, Evento &proximo) {
+	Evento(Veiculo &carro, int tipo, int tempo, Pista &estrada) {
 		veiculo = carro;
 		tipoDeEvento = tipo;
 		tempoDoDisparo = tempo;
-		pista = estrada;	
+		aPista = estrada;	
 	}
 	
 	executar() {
@@ -41,15 +40,25 @@ class Evento: private ListaEnc<Evento> {
 
 	fecharSemaforo() {}
 
-	criarVeiculo() {}
+	criarVeiculo() {
+		Veiculo *carro = new Veiculo();
+		if (verificaTamanho()) {
+			aPista->adiciona(carro);
+			aPista->tamanhoPista = tamanhoPista - carro->tamanho;
+			Evento *chegouSemaforo = new Evento(carro, 3, aPista->tempo, aPista);
+			Main::eventos->adicionaEmOrdem(chegouSemaforo);  // Acho q 'eventos' terá q ser global no main
+		}
+	}
 
-	chegouSemaforo() {}
+	chegouSemaforo() {
+		
+	}
 
 	trocaPista() {}
 
 	destruirVeiculo() {}
 
-	adicionaEmOrdem(const Evento& data) {
+	adicionaEmOrdem(const Evento &data) {
 		if (listaVazia())
 			adicionaNoInicio(data);
 		ListaEnc<Evento>::Elemento<Evento>* aux = ListaEnc<Evento>::head;
@@ -62,6 +71,12 @@ class Evento: private ListaEnc<Evento> {
 			adiciona(data);
 		adicionaNaPosicao(data, pos);
 	}
+	}
+
+	bool verificaTamanho(const Veiculo &carro, const Pista &estrada) {
+		if (carro->tamanho <= aPista->tamanhoPista)
+			return true;
+		return false;	
 	}
 
 	

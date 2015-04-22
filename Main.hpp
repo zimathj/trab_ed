@@ -160,8 +160,8 @@ class Main {
 
 
 
-    for (int i = 0; i < Tempo; i = i + o1Leste->tempoParaEntrada()) {
-      Evento *a = new Evento(NULL, 2, i + o1Leste->tempoParaEntrada(), o1Leste);
+    for (int i = 0; i < Tempo; i = i + (int tmp = o1Leste->tempoParaEntrada())) {
+      Evento *a = new Evento(NULL, 2, i + tmp, o1Leste);
      // if (a != NULL) {				// 'b' só vai ocorrer, se 'a' ocorrer, ou seja, somente em tempo de execução
      //   eventos->adicionaEmOrdem(a);
      //   Evento *b = new Evento(NULL, 3, i+o1Leste->tempo, o1Leste);
@@ -212,7 +212,19 @@ class Main {
      //   eventos->adicionaEmOrdem(b);
       }
     }
+
+
+
+
+
     // 4° passo : processar
+
+
+
+
+    for (Evento *executor = eventos->head; executor != NULL; executor = executor->getProximo()) {
+    	executor->executar();
+    }
 
 }
 
