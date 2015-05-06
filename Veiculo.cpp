@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <time.h>
+#include <cstdio>
 
 class Veiculo {
  private:
@@ -11,9 +12,12 @@ class Veiculo {
  public:
   Veiculo() {
     // tamanho do veiculo mais 3 metros(2 à frente e 1 atrás)
-    srand( (unsigned)time(NULL) );
-    tamanho = (rand() % 5 + 2) + 3;
-    direcao = rand() % 10;
+    //tamanho = (rand() % 5 + 2) + 3;
+    //direcao = rand() % 10;
+	tamanho = 3;
+	direcao = 0;
+	//printf("Tamanho do veículo = %d\n", tamanho);
+	//printf("Direcao do veículo = %d\n", direcao);	
   }
   ~Veiculo(){
 

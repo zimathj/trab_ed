@@ -2,6 +2,7 @@
 #define EVENTO_HPP
 
 #include <stdlib.h>
+#include <cstdio>
 #include "ListaEventos.cpp"
 #include "Veiculo.cpp"
 #include "Pista.cpp"
@@ -11,11 +12,11 @@ class Evento {
  private:
 	Veiculo *veiculo;
 	int tipoDeEvento;
-	int tempoDoDisparo;
+	double tempoDoDisparo;
 	Pista *pista;
   ListaEventos<Evento*> *listaEvento;
  public:
-	Evento(Veiculo *carro, int tipo, int tempo, Pista *estrada, ListaEventos<Evento*> *lista) {
+	Evento(Veiculo *carro, int tipo, double tempo, Pista *estrada, ListaEventos<Evento*> *lista) {
 		veiculo = carro;
 		tipoDeEvento = tipo;
 		tempoDoDisparo = tempo;
@@ -53,18 +54,22 @@ class Evento {
   }
 
   // pode ser um metodo só
-
   void criarVeiculo() {
 		Veiculo *carro = new Veiculo();
-		if (verificaTamanho(carro, pista)) { // Não estava recebendo os parametros
+		if (verificaTamanho(carro, pista)) { // Não estava recebendo os parametros		
 			pista->inclui(carro);
+			//printf("Incluiu carro!\n");
 			pista->setTamanhoPista(pista->getTamanhoPista() - carro->getTamanho());
-			Evento *chegouSemaforo = new Evento(carro, 3, pista->getTempo(), pista, listaEvento);
+			Evento *chegouSemaforo = new Evento(carro, 3, (tempoDoDisparo + pista->getTempo()), pista, listaEvento);
+			//printf("Endereco do chegouSemaforo = %d\n", chegouSemaforo);
+			//printf("Endereco da lista = %d\n", listaEvento);
 			listaEvento->adicionaEmOrdem(chegouSemaforo);  // Acho q 'Evento' terá q ser global no main
+			//printf("Adicionou o ChegouSemáforo = %d\n", chegouSemaforo);
 		}
 	}
 
 	void chegouSemaforo() {
+	//printf("verificou semaforo aberto\n");
     if (verificarSemaforo())
       trocaPista();
   } // chamar trocaPista se semáforo estiver aberto
@@ -74,10 +79,17 @@ class Evento {
       Pista* novaPista = pista->getNovaPista(direcaoVeiculo); // ou é ponteiro ??
     if(verificaTamanho(veiculo, novaPista)) {
       pista->somaContador();
+	//printf("Pista tamanho = %d,  e head = %d\n", pista->getTamanhoPista(), pista->getInfor());
       novaPista->inclui(veiculo);
       novaPista->setTamanhoPista(novaPista->getTamanhoPista() - veiculo->getTamanho());
+	//printf("NovaPista tamanho = %d,  e head = %d\n", novaPista->getTamanhoPista(), novaPista->getInfor());
       pista->retira();
       pista->setTamanhoPista(pista->getTamanhoPista() + veiculo->getTamanho());
+	//printf("Pista tamanho = %d,  e head = %d\n", pista->getTamanhoPista(), pista->getInfor());
+	//printf("Trocou carro de pista!\n");
+	Evento *destruir = new Evento(veiculo, 4, (tempoDoDisparo + novaPista->getTempo()), novaPista, listaEvento);
+	//printf("Destruir veiculo = %d\n", destruir);
+	listaEvento->adicionaEmOrdem(destruir);
     }
   }
 
@@ -87,15 +99,18 @@ class Evento {
     delete veiculo;
   }
 
-  void executarLista() {
+  void executarLista(ListaEventos<Evento*> *lista, int tempo) {
 		Elemento<Evento*> *executor;
-    while (listaEvento->getHead() != NULL) {
-      executor = listaEvento->getHead();
+	executor = lista->getHead();
+	int numeroEvento = 1;
+    while (executor != NULL && (executor->getInfo())->getTempoDoDisparo() < tempo) {
+	//printf("Endereco do %d evento na lista = %d\n", numeroEvento, executor->getInfo());
       (executor->getInfo())->executar();
-      listaEvento->eliminaDoInicio();
+	executor = executor->getProximo();
+      lista->eliminaDoInicio();
+	numeroEvento++;
     }
-
-	}
+   }
 
 /*	void adicionaEmOrdem(Evento& data) {
 		if (listaEvento->ListaEnc<Evento*>::listaVazia())
@@ -104,7 +119,7 @@ class Evento {
 		int pos = 0;
 		while (ListaEnc<Evento*>::aux->getProximo() != NULL && maior(data->tempoDoDisparo, (ListaEnc<Evento*>::aux->getInfo())->tempoDoDisparo)) {
 			ListaEnc<Evento*>::aux = ListaEnc<Evento*>::aux->getProximo();
-			pos++;
+			pos++;	
 		}
 		if (ListaEnc<Evento*>::maior(data->tempoDoDisparo, (ListaEnc<Evento*>::aux->getInfo())->tempoDoDisparo))
 			ListaEnc<Evento*>::adiciona(data);
@@ -122,7 +137,7 @@ class Evento {
     return pista->getSemaforo();
   }
 
-  int getTempoDoDisparo() {
+  double getTempoDoDisparo() {
   	return tempoDoDisparo;
   }
 

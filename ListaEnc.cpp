@@ -8,6 +8,7 @@
 #define LISTAENC_HPP
 
 #include "Elemento.cpp"  // Arquivo Elemento.hpp incluido.
+#include <cstdio>
 #define NULL __null
 
 template<typename T>
@@ -72,6 +73,7 @@ class ListaEnc {
 		sai = head;
 		head = sai->getProximo();
 		size--;
+		//printf("Endereco do evento eliminado = %d\n", sai->getInfo());
 		sai->~Elemento();
 	}
 
@@ -207,6 +209,7 @@ class ListaEnc {
         \param endereço do dado do tipo T que sera inserido em ordem na lista.
     */
 	void adicionaEmOrdem(const T& data) {
+		printf("Adiciona em ordem errado!\n");
 		if (listaVazia())
 			adicionaNoInicio(data);
 		Elemento<T>* aux;
@@ -282,6 +285,7 @@ class ListaEnc {
             atual = atual->getProximo();
             eliminaDoInicio();
         }
+	size = 0;
 	}
 
  protected:

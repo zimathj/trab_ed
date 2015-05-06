@@ -1,16 +1,21 @@
+#include "Elemento.cpp"
+#include "ListaEnc.cpp"
+
 #include <cstdio>
 #include <stdlib.h>
 #include "Pista.cpp"
 #include "Evento.cpp"
 #include "ListaEventos.cpp"
 
-#define TempoSimulacao 3600
+#define TempoSimulacao 100
 #define Sem_L 40
 #define Sem_S 40
 #define Sem_O 40
 #define Sem_N 40
 
   int main() {
+
+	//srand( time(NULL) );
     // Classe inicial do programa
     // 1° passo : criar as pistas
 
@@ -58,11 +63,11 @@
 
     // 2° passo : conectar as pistas
 
-    Pista *destinoO1leste[10] = {c1Leste, c1Leste, c1Leste, c1Leste, c1Leste, c1Leste, c1Leste, c1Leste, n1Norte, s1Sul};
-
+    //Pista *destinoO1leste[10] = {c1Leste, c1Leste, c1Leste, c1Leste, c1Leste, c1Leste, c1Leste, c1Leste, n1Norte, s1Sul};
+	Pista *destinoO1leste[10] = {s1Sul, s1Sul, s1Sul, s1Sul, s1Sul, s1Sul, s1Sul, s1Sul, s1Sul, s1Sul};
     //o1Oeste.conectarPistas();
     o1Leste->conectarPistas(destinoO1leste);
-
+/*
     Pista *destinoN1sul[10] = {c1Leste, c1Leste, c1Leste, c1Leste, c1Leste, c1Leste, c1Leste, c1Leste, o1Oeste, s1Sul};
     n1Sul->conectarPistas(destinoN1sul);
     //n1Norte.conectarPistas();
@@ -88,29 +93,30 @@
     l1Oeste->conectarPistas(destinoL1Oeste);
     //l1Leste.conectarPistas();
 
-
+*/
 
     // 3° passo : criar eventos
 
 
     ListaEventos<Evento*> *eventos = new ListaEventos<Evento*>();  // cria a lista de eventos
+	//printf("Endereço da lista no main = %d\n", eventos);
 	    // abre os sinaleiros leste
     int i = 0;
-    for (i = 0; i < TempoSimulacao; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
-	     Evento *a = new Evento(NULL, 1, i, o1Leste, eventos);
-	     eventos->adicionaEmOrdem(a);
-	     Evento *b = new Evento(NULL, 1, i, c1Leste, eventos);
-	     eventos->adicionaEmOrdem(b);
-    }
+//    for (i = 0; i < TempoSimulacao; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
+//	     Evento *a = new Evento(NULL, 1, i, o1Leste, eventos);
+//	     eventos->adicionaEmOrdem(a);
+	     //Evento *b = new Evento(NULL, 1, i, c1Leste, eventos);
+	     //eventos->adicionaEmOrdem(b);
+//    }
 
     // fecha os sinaleiros leste
-    for (i = Sem_L; i < TempoSimulacao; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
-	     Evento *a = new Evento(NULL, 0, i, o1Leste, eventos);
-	     eventos->adicionaEmOrdem(a);
-	     Evento *b = new Evento(NULL, 0, i, c1Leste, eventos);
-	     eventos->adicionaEmOrdem(b);
-    }
-
+//    for (i = Sem_L; i < TempoSimulacao; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
+//	     Evento *a = new Evento(NULL, 0, i, o1Leste, eventos);
+//	     eventos->adicionaEmOrdem(a);
+	     //Evento *b = new Evento(NULL, 0, i, c1Leste, eventos);
+	     //eventos->adicionaEmOrdem(b);
+//    }
+/*
     // abre os sinaleiros sul
     for (i = Sem_L; i < TempoSimulacao; i = i + (Sem_L+Sem_S+Sem_O+Sem_N)) {
 	     Evento *a = new Evento(NULL, 1, i, n1Sul, eventos);
@@ -162,14 +168,25 @@
 
     // criaçao de carros nas pistas fonte
 
-
-    int tmp;
-
-    for (i = 0; i < TempoSimulacao; i = i + o1Leste->tempoParaEntrada()) {
-       Evento *a = new Evento(NULL, 2, i + o1Leste->tempoParaEntrada(), o1Leste, eventos);
+*/
+    double tmp;
+	tmp = o1Leste->tempoParaEntrada();
+    for (i = 0; i < TempoSimulacao; i = i + (tmp = o1Leste->tempoParaEntrada())) {
+	//printf("Valor de tmp antes da criacao do evento = %d\n", tmp);
+       Evento *a = new Evento(NULL, 2, i, o1Leste, eventos);
+	//printf("Valor de tmp depois da criaco = %d\n", tmp);
        eventos->adicionaEmOrdem(a);
+	//printf("Endereco do evento de criacao do carro = %d\n", a);
     }
 
+	int nEvento = 1;
+	Elemento<Evento*>* teste = eventos->getHead();
+	while(teste != NULL) {
+		//printf("Main: Endereco do %d evento na lista = %d\n", nEvento, teste->getInfo());
+		teste = teste->getProximo();
+		nEvento++;
+	}
+/*
     for (i = 0; i < TempoSimulacao; i = i + (tmp = n1Sul->tempoParaEntrada())) {
        Evento *a = new Evento(NULL, 2, i + tmp, n1Sul, eventos);
        eventos->adicionaEmOrdem(a);
@@ -195,9 +212,9 @@
       eventos->adicionaEmOrdem(a);
     }
     // 4° passo : processar
-
+*/
     Evento *executor;
-    executor->executarLista();
+    executor->executarLista(eventos, TempoSimulacao);
 
     
 

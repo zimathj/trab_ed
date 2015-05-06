@@ -5,6 +5,7 @@
 #include <time.h>
 #include "Veiculo.cpp"
 #include "FilaEnc.cpp"
+#include "Elemento.cpp"
 
 // Nao declarar template aqui
 
@@ -18,9 +19,9 @@ class Pista: private FilaEnc<Veiculo*> {
    bool pistaFonte;
    bool pistaSumidouro;
    Pista *direcao[10];
-   int tempo;
+   double tempo;
    //Pista **direcao = new Pista*[10];
-   bool semaforo = false;
+   bool semaforo = true;
    int contador =  0;
 
  public:
@@ -37,7 +38,7 @@ class Pista: private FilaEnc<Veiculo*> {
 		direcao[i] = NULL;
      //direcao = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
 	//direcao = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-	tempo = tamanhoPista/velocidade;  // Tempo q cada veículo vai levar para chegar ao final
+	tempo = tamanhoPista/(velocidade/3.6);  // Tempo q cada veículo vai levar para chegar ao final
    }
    ~Pista() {
 	FilaEnc<Veiculo*>::limparFila();  // Usa o destrutor herdado
@@ -90,12 +91,20 @@ class Pista: private FilaEnc<Veiculo*> {
      return contador;
    }
 
-   int getTempo() {
+   double getTempo() {
      return tempo;
    }
 
    char* getNome() {
      return id;
+   }
+
+   Elemento<Veiculo*>* getHead() {
+   	return FilaEnc<Veiculo*>::getHead();
+   }
+
+   Veiculo* getInfor() {
+	return (getHead())->getInfo();
    }
 
    //
@@ -112,15 +121,17 @@ class Pista: private FilaEnc<Veiculo*> {
      contador++;
    }
 
-   int tempoParaEntrada() {
-     srand( (unsigned)time(NULL) );  // Acho q tem q ter essa linha, se não rand() sorteia sempre os mesmos nºos
-     return int((rand()/RAND_MAX)*(variancia*2+1) + (tempoEntrada-variancia));  // Seguindo as instrucoes do professor
+   double tempoParaEntrada() {
+      // Acho q tem q ter essa linha, se não rand() sorteia sempre os mesmos nºos
+	//int a = int((rand()/RAND_MAX)*(variancia*2+1) + (tempoEntrada-variancia));
+	//printf("Tempo para entrada do carro = %d\n", a);
+     return (double)tempoEntrada;  // Seguindo as instrucoes do professor
 										// retorna o tempo da criacao
    }
 
    // INCLUIR MÉTODOS DA FILA ENC
 
-  void inclui(Veiculo*& dado) {
+  void inclui(Veiculo* dado) {
     FilaEnc<Veiculo*>::inclui(dado);
   }
   void retira() {
